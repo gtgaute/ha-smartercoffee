@@ -1,0 +1,18 @@
+{
+  "domain": "smarter_coffee",
+  "name": "Smarter Coffee",
+  "codeowners": ["@gtgaute"],
+  "config_flow": true,
+  "dependencies": ["network"],
+  "dhcp": [
+    { "hostname": "esp_*", "macaddress": "5CCF7F*" },
+    { "hostname": "esp_*", "macaddress": "18FE34*" }
+  ],
+  "documentation": "https://github.com/gtgaute/ha-smartercoffee",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/gtgaute/ha-smartercoffee/issues",
+  "loggers": ["custom_components.smarter_coffee"],
+  "requirements": [],
+  "version": "0.1.0"
+}

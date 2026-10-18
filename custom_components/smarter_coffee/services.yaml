@@ -1,0 +1,31 @@
+brew:
+  target:
+    entity:
+      integration: smarter_coffee
+      domain: button
+  fields:
+    cups:
+      selector:
+        number:
+          min: 1
+          max: 12
+          mode: slider
+    strength:
+      selector:
+        select:
+          translation_key: strength
+          options:
+            - weak
+            - medium
+            - strong
+    keep_warm:
+      selector:
+        number:
+          min: 0
+          max: 40
+          step: 5
+          unit_of_measurement: min
+          mode: slider
+    grind:
+      selector:
+        boolean:

@@ -1,0 +1,15 @@
+Smarter Coffee for Home Assistant
+Copyright 2026 Gaute Thøgersen
+
+Built with Claude Code (Anthropic).
+
+Protocol knowledge and the entity design are based on:
+
+  SmarterCoffee Maker v1.0 HA Integration
+  Copyright 2019-2023 Sergiy Maysak
+  Licensed under the Apache License, Version 2.0
+  https://github.com/sergeymaysak/smartercoffee
+
+  iBrew: iKettle, iKettle 2.0 & Smarter Coffee Toolkit
+  Tristan (Tristan79) and contributors
+  https://github.com/idserda/iBrew

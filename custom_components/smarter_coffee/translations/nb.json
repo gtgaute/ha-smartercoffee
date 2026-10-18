@@ -1,0 +1,109 @@
+{
+  "config": {
+    "flow_title": "Smarter Coffee ({host})",
+    "step": {
+      "pick": {
+        "title": "Velg maskin",
+        "description": "Disse Smarter Coffee-maskinene svarte på nettet.",
+        "data": { "host": "Maskin" }
+      },
+      "manual": {
+        "title": "Adressen til maskinen",
+        "description": "Ingen maskin svarte automatisk. Skriv inn IP-adressen.",
+        "data": { "host": "IP-adresse" }
+      },
+      "discovery_confirm": {
+        "description": "Vil du legge til Smarter Coffee-maskinen på {host} (fastvare {firmware})?"
+      },
+      "reconfigure": {
+        "title": "Endre adresse",
+        "data": { "host": "IP-adresse" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Fant ingen Smarter Coffee-maskin på denne adressen."
+    },
+    "abort": {
+      "already_configured": "Denne maskinen er allerede satt opp.",
+      "not_smarter_coffee": "Enheten er ikke en Smarter Coffee-maskin.",
+      "reconfigure_successful": "Adressen er oppdatert."
+    }
+  },
+  "selector": {
+    "pick": { "options": { "manual": "Skriv inn adresse selv" } },
+    "strength": { "options": { "weak": "Svak", "medium": "Middels", "strong": "Sterk" } }
+  },
+  "entity": {
+    "binary_sensor": {
+      "carafe": { "name": "Kanne" },
+      "water_shortage": { "name": "For lite vann" },
+      "brewing": { "name": "Brygger" }
+    },
+    "button": {
+      "brew": { "name": "Brygg" },
+      "stop": { "name": "Stopp" }
+    },
+    "number": {
+      "cups": { "name": "Kopper" },
+      "keep_warm": { "name": "Hold varm" }
+    },
+    "select": {
+      "strength": {
+        "name": "Styrke",
+        "state": { "weak": "Svak", "medium": "Middels", "strong": "Sterk" }
+      },
+      "brew_mode": {
+        "name": "Kaffe",
+        "state": { "beans": "Bønner (males)", "filter": "Malt (filter)" }
+      }
+    },
+    "sensor": {
+      "state": {
+        "name": "Status",
+        "state": {
+          "grinding": "Maler",
+          "brewing": "Brygger",
+          "keeping_warm": "Holder varm",
+          "ready": "Klar",
+          "not_ready": "Ikke klar"
+        },
+        "state_attributes": { "cups_brewed": { "name": "Kopper brygget" } }
+      },
+      "water_level": {
+        "name": "Vannivå",
+        "state": { "empty": "Tom", "low": "Lav", "half": "Halv", "full": "Full" }
+      }
+    },
+    "switch": {
+      "hotplate": { "name": "Varmeplate" },
+      "carafe_required": { "name": "Krev kanne" },
+      "cup_mode": { "name": "Én kopp" }
+    }
+  },
+  "exceptions": {
+    "cannot_connect": { "message": "Fikk ikke kontakt med kaffemaskinen på {host}." },
+    "not_connected": { "message": "Kaffemaskinen er ikke tilkoblet." },
+    "command_already_brewing": { "message": "Maskinen brygger allerede." },
+    "command_no_carafe": { "message": "Sett kanna på varmeplaten først." },
+    "command_no_water": { "message": "For lite vann i tanken." },
+    "command_invalid_value": { "message": "Maskinen godtok ikke verdien." },
+    "command_no_carafe_aborted": { "message": "Bryggingen stoppet: kanna ble tatt av." },
+    "command_no_water_aborted": { "message": "Bryggingen stoppet: tom for vann." },
+    "command_low_water_aborted": { "message": "Bryggingen stoppet: for lite vann til å bli ferdig." },
+    "command_invalid_timer": { "message": "Ugyldig tidsur." },
+    "command_wifi_error": { "message": "Maskinen meldte en Wi-Fi-feil." },
+    "command_invalid_command": { "message": "Maskinen støtter ikke denne kommandoen." }
+  },
+  "services": {
+    "brew": {
+      "name": "Brygg",
+      "description": "Brygg kaffe. Det du ikke fyller inn, hentes fra det som er valgt på maskinen.",
+      "fields": {
+        "cups": { "name": "Kopper", "description": "Antall kopper, 1 til 12." },
+        "strength": { "name": "Styrke", "description": "Svak, middels eller sterk." },
+        "keep_warm": { "name": "Hold varm", "description": "Minutter på varmeplaten etterpå, 0 for av." },
+        "grind": { "name": "Mal bønner", "description": "Mal bønner, eller bruk malt kaffe i filteret." }
+      }
+    }
+  }
+}

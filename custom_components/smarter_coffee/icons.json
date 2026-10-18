@@ -1,0 +1,45 @@
+{
+  "entity": {
+    "binary_sensor": {
+      "carafe": { "default": "mdi:coffee-maker-outline", "state": { "on": "mdi:coffee-maker-check" } },
+      "water_shortage": { "default": "mdi:water-check", "state": { "on": "mdi:water-alert" } },
+      "brewing": { "default": "mdi:coffee-maker" }
+    },
+    "button": {
+      "brew": { "default": "mdi:coffee" },
+      "stop": { "default": "mdi:stop" }
+    },
+    "number": {
+      "cups": { "default": "mdi:cup" },
+      "keep_warm": { "default": "mdi:timer-outline" }
+    },
+    "select": {
+      "strength": { "default": "mdi:arm-flex" },
+      "brew_mode": { "default": "mdi:grain" }
+    },
+    "sensor": {
+      "state": {
+        "default": "mdi:coffee-maker",
+        "state": {
+          "grinding": "mdi:grain",
+          "brewing": "mdi:coffee-maker-outline",
+          "keeping_warm": "mdi:heat-wave",
+          "ready": "mdi:coffee-maker-check",
+          "not_ready": "mdi:coffee-off"
+        }
+      },
+      "water_level": {
+        "default": "mdi:cup-water",
+        "state": { "empty": "mdi:cup-outline", "low": "mdi:cup-water", "half": "mdi:cup-water", "full": "mdi:cup" }
+      }
+    },
+    "switch": {
+      "hotplate": { "default": "mdi:heat-wave" },
+      "carafe_required": { "default": "mdi:coffee-maker-check-outline" },
+      "cup_mode": { "default": "mdi:coffee-outline" }
+    }
+  },
+  "services": {
+    "brew": { "service": "mdi:coffee" }
+  }
+}

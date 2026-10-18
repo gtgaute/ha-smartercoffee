@@ -1,0 +1,109 @@
+{
+  "config": {
+    "flow_title": "Smarter Coffee ({host})",
+    "step": {
+      "pick": {
+        "title": "Choose machine",
+        "description": "These Smarter Coffee machines answered on the network.",
+        "data": { "host": "Machine" }
+      },
+      "manual": {
+        "title": "Machine address",
+        "description": "No machine answered automatically. Enter its IP address.",
+        "data": { "host": "IP address" }
+      },
+      "discovery_confirm": {
+        "description": "Add the Smarter Coffee machine at {host} (firmware {firmware})?"
+      },
+      "reconfigure": {
+        "title": "Change address",
+        "data": { "host": "IP address" }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach a Smarter Coffee machine at this address."
+    },
+    "abort": {
+      "already_configured": "This machine is already set up.",
+      "not_smarter_coffee": "The device is not a Smarter Coffee machine.",
+      "reconfigure_successful": "Address updated."
+    }
+  },
+  "selector": {
+    "pick": { "options": { "manual": "Enter address manually" } },
+    "strength": { "options": { "weak": "Weak", "medium": "Medium", "strong": "Strong" } }
+  },
+  "entity": {
+    "binary_sensor": {
+      "carafe": { "name": "Carafe" },
+      "water_shortage": { "name": "Not enough water" },
+      "brewing": { "name": "Brewing" }
+    },
+    "button": {
+      "brew": { "name": "Brew" },
+      "stop": { "name": "Stop" }
+    },
+    "number": {
+      "cups": { "name": "Cups" },
+      "keep_warm": { "name": "Keep warm" }
+    },
+    "select": {
+      "strength": {
+        "name": "Strength",
+        "state": { "weak": "Weak", "medium": "Medium", "strong": "Strong" }
+      },
+      "brew_mode": {
+        "name": "Coffee",
+        "state": { "beans": "Beans (grind)", "filter": "Ground (filter)" }
+      }
+    },
+    "sensor": {
+      "state": {
+        "name": "State",
+        "state": {
+          "grinding": "Grinding",
+          "brewing": "Brewing",
+          "keeping_warm": "Keeping warm",
+          "ready": "Ready",
+          "not_ready": "Not ready"
+        },
+        "state_attributes": { "cups_brewed": { "name": "Cups brewed" } }
+      },
+      "water_level": {
+        "name": "Water level",
+        "state": { "empty": "Empty", "low": "Low", "half": "Half", "full": "Full" }
+      }
+    },
+    "switch": {
+      "hotplate": { "name": "Hotplate" },
+      "carafe_required": { "name": "Require carafe" },
+      "cup_mode": { "name": "Single cup mode" }
+    }
+  },
+  "exceptions": {
+    "cannot_connect": { "message": "Could not connect to the coffee machine at {host}." },
+    "not_connected": { "message": "The coffee machine is not connected." },
+    "command_already_brewing": { "message": "The machine is already brewing." },
+    "command_no_carafe": { "message": "Put the carafe on the hotplate first." },
+    "command_no_water": { "message": "Not enough water in the tank." },
+    "command_invalid_value": { "message": "The machine did not accept the value." },
+    "command_no_carafe_aborted": { "message": "Brewing stopped: the carafe was removed." },
+    "command_no_water_aborted": { "message": "Brewing stopped: out of water." },
+    "command_low_water_aborted": { "message": "Brewing stopped: too little water to finish." },
+    "command_invalid_timer": { "message": "Invalid timer." },
+    "command_wifi_error": { "message": "The machine reported a Wi-Fi error." },
+    "command_invalid_command": { "message": "The machine does not support this command." }
+  },
+  "services": {
+    "brew": {
+      "name": "Brew",
+      "description": "Brew coffee. Anything left out uses what is selected on the machine.",
+      "fields": {
+        "cups": { "name": "Cups", "description": "Number of cups, 1 to 12." },
+        "strength": { "name": "Strength", "description": "Weak, medium or strong." },
+        "keep_warm": { "name": "Keep warm", "description": "Minutes on the hotplate afterwards, 0 for off." },
+        "grind": { "name": "Grind beans", "description": "Grind beans, or use ground coffee in the filter." }
+      }
+    }
+  }
+}
