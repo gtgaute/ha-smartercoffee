@@ -12,6 +12,8 @@ import contextlib
 import logging
 import socket
 from collections.abc import Callable
+from dataclasses import replace
+from typing import Any
 
 from .protocol import (
     DEVICE_TYPE_COFFEE,
@@ -311,17 +313,34 @@ class SmarterCoffeeClient:
         await self._command(encode_simple(Command.STOP))
 
     async def set_cups(self, cups: int) -> None:
-        """Select number of cups."""
+        """Select number of cups and keep it as the default."""
         await self._command(encode_set_cups(cups))
+        await self._remember(cups=cups)
 
     async def set_strength(self, strength: Strength) -> None:
-        """Select strength."""
+        """Select strength and keep it as the default."""
         await self._command(encode_set_strength(strength))
+        await self._remember(strength=strength)
 
     async def set_grind(self, grind: bool) -> None:
         """Select beans (grind) or filter. The machine only offers a toggle."""
         if self.status is None or self.status.grind != grind:
             await self._command(encode_simple(Command.TOGGLE_GRIND))
+        await self._remember(grind=grind)
+
+    async def _remember(self, **changes: Any) -> None:
+        """Store a selection as the default.
+
+        After each brew the machine goes back to its stored defaults, so a
+        selection that is not stored would only last until the next brew.
+        """
+        if self.settings is None:
+            return
+        settings = replace(self.settings, **changes)
+        if settings != self.settings:
+            await self.store_settings(
+                settings.cups, settings.strength, settings.grind, settings.keep_warm
+            )
 
     async def hotplate_on(self, minutes: int) -> None:
         """Turn the hotplate on."""

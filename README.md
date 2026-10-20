@@ -13,10 +13,10 @@ Tested on firmware 22 with Home Assistant 2026.10.
 | Carafe | binary sensor | Carafe on the hotplate. |
 | Not enough water | binary sensor | On when there is too little water to brew. |
 | Brewing | binary sensor | On while grinding or brewing. |
-| Cups | number | Cups selected on the machine, 1 to 12. |
+| Cups | number | Cups, 1 to 12. Kept as the machine default, so it stays after a brew. |
 | Keep warm | number | Hotplate time, 5 to 40 minutes. Stored on the machine, so its own buttons use it too. |
-| Strength | select | Weak, medium or strong. |
-| Coffee | select | Beans (grind) or ground coffee in the filter. |
+| Strength | select | Weak, medium or strong. Kept as the default. |
+| Coffee | select | Beans (grind) or ground coffee in the filter. Kept as the default. |
 | Hotplate | switch | Turn the hotplate on or off. |
 | Require carafe | switch (config) | Refuse to brew without the carafe. |
 | Single cup mode | switch (config) | Single cup instead of carafe mode. |

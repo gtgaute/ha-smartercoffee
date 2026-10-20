@@ -80,26 +80,26 @@ async def test_brew_error(
 async def test_settings(
     hass: HomeAssistant, setup_entry: MockConfigEntry, machine: FakeMachine
 ) -> None:
-    """Selects, numbers and switches send the right frames."""
+    """Selects, numbers and switches send the right frames, and selections are kept as defaults."""
     await hass.services.async_call(
         "number", "set_value", {"entity_id": "number.smarter_coffee_cups", "value": 5}, blocking=True
     )
-    assert machine.received[-1] == bytes.fromhex("36 05 7e")
+    assert machine.received[-2:] == [bytes.fromhex("36 05 7e"), bytes.fromhex("38 01 05 01 28 7e")]
     await hass.services.async_call(
         "select", "select_option",
         {"entity_id": "select.smarter_coffee_strength", "option": "weak"}, blocking=True,
     )
-    assert machine.received[-1] == bytes.fromhex("35 00 7e")
+    assert machine.received[-2:] == [bytes.fromhex("35 00 7e"), bytes.fromhex("38 00 05 01 28 7e")]
     await hass.services.async_call(
         "select", "select_option",
         {"entity_id": "select.smarter_coffee_coffee", "option": "filter"}, blocking=True,
     )
-    assert machine.received[-1] == bytes.fromhex("3c 7e")
+    assert machine.received[-2:] == [bytes.fromhex("3c 7e"), bytes.fromhex("38 00 05 00 28 7e")]
     await hass.services.async_call(
         "number", "set_value",
         {"entity_id": "number.smarter_coffee_keep_warm", "value": 15}, blocking=True,
     )
-    assert machine.received[-1] == bytes.fromhex("38 01 02 01 0f 7e")
+    assert machine.received[-1] == bytes.fromhex("38 00 05 00 0f 7e")
     assert hass.states.get("number.smarter_coffee_keep_warm").state == "15"
     await hass.services.async_call(
         "switch", "turn_on", {"entity_id": "switch.smarter_coffee_hotplate"}, blocking=True

@@ -14,5 +14,5 @@
   "issue_tracker": "https://github.com/gtgaute/ha-smartercoffee/issues",
   "loggers": ["custom_components.smarter_coffee"],
   "requirements": [],
-  "version": "0.1.0"
+  "version": "0.1.1"
 }
